@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Card from './Components/Card';
 import './App.css';
 
 const pageSize = 20;
@@ -22,14 +23,15 @@ function App() {
 			<p>Test</p>
 			<div>
 				{(data || []).map((card, index) => (
-					<div key={index}>
-						<div>
-							<img src={card.imageUrl} height={400} width={300} alt={card.id} />
-							<h1>{card.name}</h1>
-							<h2>{card.set.name}</h2>
-							<h4>{card.type}</h4>
-							<p>{card.text}</p>
-						</div>
+					<div key={card.id}>
+						<Card
+							imageUrl={card.imageUrl}
+							id={card.id}
+							name={card.name}
+							setName={card.set.name}
+							type={card.type}
+							text={card.text}
+						/>
 					</div>
 				))}
 			</div>
