@@ -20,6 +20,19 @@ function App() {
 	return (
 		<div className='App'>
 			<p>Test</p>
+			<div>
+				{(data || []).map((card, index) => (
+					<div key={index}>
+						<div>
+							<img src={card.imageUrl} height={400} width={300} alt={card.id} />
+							<h1>{card.name}</h1>
+							<h2>{card.set.name}</h2>
+							<h4>{card.type}</h4>
+							<p>{card.text}</p>
+						</div>
+					</div>
+				))}
+			</div>
 			<button onClick={() => setPage(page + 1)}>Click</button>
 		</div>
 	);
