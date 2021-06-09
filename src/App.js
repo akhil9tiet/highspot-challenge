@@ -19,11 +19,11 @@ function App() {
 
 	console.log(data);
 	return (
-		<div className='App'>
+		<React.Fragment>
 			<p>Test</p>
 			<div>
 				{(data || []).map((card, index) => (
-					<div key={card.id}>
+					<div className='container' key={card.id}>
 						<Card
 							imageUrl={card.imageUrl}
 							id={card.id}
@@ -36,7 +36,7 @@ function App() {
 				))}
 			</div>
 			<button onClick={() => setPage(page + 1)}>Click</button>
-		</div>
+		</React.Fragment>
 	);
 }
 
