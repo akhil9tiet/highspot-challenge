@@ -10,7 +10,7 @@ export default function GameCard({ id, imageUrl, name, text, setName, type }) {
 		<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={id}>
 			<Card className='card'>
 				<CardContent className='card-content'>
-					<CardMedia style={{ height: '100%', width: '100%' }} image={imageUrl} title={id} />
+					<CardMedia style={{ height: 500, width: 300 }} image={imageUrl} title={id} />
 					<div className='content'>
 						<Typography variant='body2' component='h1'>
 							{name}
