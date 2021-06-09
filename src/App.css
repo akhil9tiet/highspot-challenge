@@ -14,8 +14,6 @@ body {
 	width: 100%;
 }
 
-/*************************************************************/
-
 @media all and (min-width: 40em) {
 	.item {
 		width: 50%;
@@ -26,14 +24,11 @@ body {
 		width: 33.33%;
 	}
 }
-/*  */
 .card {
 	/* opacity: 0.6; */
 	min-width: 100%;
 	max-width: 100%;
 }
-
-/* list-content */
 
 .content {
 	display: flex;
@@ -57,14 +52,22 @@ body {
 	align-content: flex-start;
 }
 
-/*
-Credits: Mr. Asif Biryani
-for helping with this CSS piece
-*/
 .card-content {
 	padding: 10 !important;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
+}
+
+.MuiCardMedia-root {
+
+	align-self: center;
+}
+
+.card-footer {
+	margin: 0;
+	display: flex;
+	padding-bottom: 30px;
+	flex-direction: row;
 }
