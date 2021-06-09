@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import GameCard from './Components/GameCard';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import './App.css';
 
 const pageSize = 20;
@@ -18,10 +24,21 @@ function App() {
 
 	console.log(data);
 	return (
-		<div className='App'>
+		<React.Fragment>
 			<p>Test</p>
-			<button onClick={() => setPage(page + 1)}>Click</button>
-		</div>
+			<Grid container className='container'>
+				{(data || []).map((card, index) => (
+					<GameCard
+						imageUrl={card.imageUrl}
+						id={card.id}
+						name={card.name}
+						setName={card.set.name}
+						type={card.type}
+						text={card.text}
+					/>
+				))}
+			</Grid>
+		</React.Fragment>
 	);
 }
 

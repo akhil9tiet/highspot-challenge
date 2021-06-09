@@ -1,0 +1,73 @@
+body {
+	padding: 2%;
+	background: #e0e5ec;
+}
+/* list */
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+/* list-item */
+.item {
+	display: flex;
+	padding: 0.8em;
+	width: 100%;
+}
+
+@media all and (min-width: 40em) {
+	.item {
+		width: 50%;
+	}
+}
+@media all and (min-width: 60em) {
+	.item {
+		width: 33.33%;
+	}
+}
+.card {
+	/* opacity: 0.6; */
+	min-width: 100%;
+	max-width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-content: stretch;
+	justify-content: stretch;
+	padding-top: 1em;
+	width: 100%;
+}
+
+.content p {
+	display: flex;
+	flex: 1 0 auto;
+	align-content: stretch;
+	font-size: 1em;
+	padding: 0 10px;
+}
+
+.icon {
+	align-content: flex-start;
+}
+
+.card-content {
+	padding: 10 !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.MuiCardMedia-root {
+
+	align-self: center;
+}
+
+.card-footer {
+	margin: 0;
+	display: flex;
+	padding-bottom: 30px;
+	flex-direction: row;
+}
