@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Components/Card';
+import GameCard from './Components/GameCard';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import './App.css';
 
 const pageSize = 20;
@@ -21,21 +26,18 @@ function App() {
 	return (
 		<React.Fragment>
 			<p>Test</p>
-			<div>
+			<Grid container className='container'>
 				{(data || []).map((card, index) => (
-					<div className='container' key={card.id}>
-						<Card
-							imageUrl={card.imageUrl}
-							id={card.id}
-							name={card.name}
-							setName={card.set.name}
-							type={card.type}
-							text={card.text}
-						/>
-					</div>
+					<GameCard
+						imageUrl={card.imageUrl}
+						id={card.id}
+						name={card.name}
+						setName={card.set.name}
+						type={card.type}
+						text={card.text}
+					/>
 				))}
-			</div>
-			<button onClick={() => setPage(page + 1)}>Click</button>
+			</Grid>
 		</React.Fragment>
 	);
 }
