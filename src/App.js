@@ -52,6 +52,9 @@ function App() {
 	return (
 		<React.Fragment>
 			<Grid container className='container'>
+				<input />
+			</Grid>
+			<Grid container className='container'>
 				{(data || []).map((card, index) => {
 					if (data.length === index + 1) {
 						return (
