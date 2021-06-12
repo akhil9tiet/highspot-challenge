@@ -19,6 +19,7 @@ function App() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
+	const [search, setSearch] = useState('');
 
 	const observer = useRef();
 
@@ -50,7 +51,6 @@ function App() {
 
 	return (
 		<React.Fragment>
-			<p>Test</p>
 			<Grid container className='container'>
 				{(data || []).map((card, index) => {
 					if (data.length === index + 1) {
