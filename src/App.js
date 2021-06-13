@@ -138,7 +138,7 @@ function App() {
 						<SkeletonCard />
 					</>
 				)}
-				{error && 'Error in loading cards...'}
+				{error && constants.ERROR_MESSAGE}
 			</Grid>
 		</React.Fragment>
 	);
