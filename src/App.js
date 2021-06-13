@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import GameCard from './components/GameCard';
-import * as constants from './constants';
 import Grid from '@material-ui/core/Grid';
-import SkeletonCard from './components/SkeletonCard';
 import Fuse from 'fuse.js';
-
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
+import GameCard from './components/GameCard';
+import SkeletonCard from './components/SkeletonCard';
+import * as constants from './constants';
+
 
 const fetchData = async (page) => {
 	let response = await fetch(
