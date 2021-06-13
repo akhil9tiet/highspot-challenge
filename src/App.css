@@ -7,6 +7,24 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.container input {
+	width: 100%;
+	padding: 1em;
+	border-radius: 0.5em;
+	margin: 2em 0em 2em 0em;
+	font-size: 24px;
+}
+
+.container span {
+	color: #c0c5cc;
+	font-size: 8em;
+	font-weight: bold;
+	font-family: sans-serif;
+	text-transform: uppercase;
+	text-shadow: #c0c5cc, #a0b5bb;
+	position: relative;
+}
 /* list-item */
 .item {
 	display: flex;

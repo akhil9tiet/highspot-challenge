@@ -3,6 +3,8 @@ import GameCard from './components/GameCard';
 import * as constants from './constants';
 import Grid from '@material-ui/core/Grid';
 import SkeletonCard from './components/SkeletonCard';
+import { Input } from '@material-ui/core';
+import Fuse from 'fuse.js';
 
 import './App.css';
 
@@ -19,7 +21,34 @@ function App() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState({ textValue: '', isSearching: false });
+
+	const searchItem = (query) => {
+		if (!query) {
+			setData(data);
+			return;
+		} else {
+			setLoading(true);
+			const isSearching = query.trim() !== '';
+			setSearch({ ...search, textValue: query, isSearching });
+			const fuse = new Fuse(data, {
+				keys: ['name'],
+			});
+			const result = fuse.search(query);
+			console.log('result', result);
+			const finalResult = [];
+			if (result.length) {
+				result.forEach((item) => {
+					finalResult.push(item.item);
+				});
+				setData(finalResult);
+				setLoading(false);
+			} else {
+				setLoading(true);
+				setData([]);
+			}
+		}
+	};
 
 	const observer = useRef();
 
@@ -49,10 +78,20 @@ function App() {
 		[loading, hasMore]
 	);
 
+	console.log('searchTerm', search);
+
 	return (
 		<React.Fragment>
 			<Grid container className='container'>
-				<input />
+				<span>HighSpot Challenge</span>
+			</Grid>
+			<Grid container className='container'>
+				<input
+					type='text'
+					onChange={(e) => searchItem(e.target.value)}
+					value={search.textValue}
+					placeholder='Search Cards'
+				/>
 			</Grid>
 			<Grid container className='container'>
 				{(data || []).map((card, index) => {
