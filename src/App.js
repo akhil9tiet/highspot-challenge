@@ -3,6 +3,7 @@ import GameCard from './components/GameCard';
 import * as constants from './constants';
 import Grid from '@material-ui/core/Grid';
 import SkeletonCard from './components/SkeletonCard';
+import Fuse from 'fuse.js';
 
 import './App.css';
 
@@ -14,11 +15,37 @@ const fetchData = async (page) => {
 };
 
 function App() {
-	let [data, setData] = useState([]);
-	let [page, setPage] = useState(1);
+	const [data, setData] = useState([]);
+	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
+	const [search, setSearch] = useState('');
+
+	const searchItem = (query) => {
+		if (!query) {
+			setData(data);
+			return;
+		} else {
+			setLoading(true);
+			setSearch(query);
+			const fuse = new Fuse(data, {
+				keys: ['name'],
+			});
+			const result = fuse.search(query);
+			const finalResult = [];
+			if (result.length) {
+				result.forEach((item) => {
+					finalResult.push(item.item);
+				});
+				setData([...new Set([...finalResult])]);
+				setLoading(false);
+			} else {
+				setLoading(false);
+				setData((prevState) => prevState);
+			}
+		}
+	};
 
 	const observer = useRef();
 
@@ -50,7 +77,21 @@ function App() {
 
 	return (
 		<React.Fragment>
-			<p>Test</p>
+			<Grid container className='container'>
+				<span>HighSpot Challenge</span>
+			</Grid>
+			<Grid container className='container'>
+				<input
+					type='text'
+					onChange={(event) => {
+						event.preventDefault();
+						const value = event.target.value;
+						searchItem(value);
+					}}
+					value={search.textValue}
+					placeholder='Search Cards'
+				/>
+			</Grid>
 			<Grid container className='container'>
 				{(data || []).map((card, index) => {
 					if (data.length === index + 1) {
@@ -64,7 +105,6 @@ function App() {
 								md={4}
 								lg={3}
 								key={index}>
-								{/* <div key={card.id}> */}
 								<GameCard
 									imageUrl={card.imageUrl}
 									id={card.id}
@@ -73,7 +113,6 @@ function App() {
 									type={card.type}
 									text={card.text}
 								/>
-								{/* </div> */}
 							</Grid>
 						);
 					} else {
