@@ -3,7 +3,6 @@ import GameCard from './components/GameCard';
 import * as constants from './constants';
 import Grid from '@material-ui/core/Grid';
 import SkeletonCard from './components/SkeletonCard';
-import { Input } from '@material-ui/core';
 import Fuse from 'fuse.js';
 
 import './App.css';
@@ -16,12 +15,12 @@ const fetchData = async (page) => {
 };
 
 function App() {
-	let [data, setData] = useState([]);
-	let [page, setPage] = useState(1);
+	const [data, setData] = useState([]);
+	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
-	const [search, setSearch] = useState({ textValue: '', isSearching: false });
+	const [search, setSearch] = useState('');
 
 	const searchItem = (query) => {
 		if (!query) {
@@ -29,23 +28,21 @@ function App() {
 			return;
 		} else {
 			setLoading(true);
-			const isSearching = query.trim() !== '';
-			setSearch({ ...search, textValue: query, isSearching });
+			setSearch(query);
 			const fuse = new Fuse(data, {
 				keys: ['name'],
 			});
 			const result = fuse.search(query);
-			console.log('result', result);
 			const finalResult = [];
 			if (result.length) {
 				result.forEach((item) => {
 					finalResult.push(item.item);
 				});
-				setData(finalResult);
+				setData([...new Set([...finalResult])]);
 				setLoading(false);
 			} else {
-				setLoading(true);
-				setData([]);
+				setLoading(false);
+				setData((prevState) => prevState);
 			}
 		}
 	};
@@ -78,8 +75,6 @@ function App() {
 		[loading, hasMore]
 	);
 
-	console.log('searchTerm', search);
-
 	return (
 		<React.Fragment>
 			<Grid container className='container'>
@@ -88,7 +83,11 @@ function App() {
 			<Grid container className='container'>
 				<input
 					type='text'
-					onChange={(e) => searchItem(e.target.value)}
+					onChange={(event) => {
+						event.preventDefault();
+						const value = event.target.value;
+						searchItem(value);
+					}}
 					value={search.textValue}
 					placeholder='Search Cards'
 				/>
@@ -106,7 +105,6 @@ function App() {
 								md={4}
 								lg={3}
 								key={index}>
-								{/* <div key={card.id}> */}
 								<GameCard
 									imageUrl={card.imageUrl}
 									id={card.id}
@@ -115,7 +113,6 @@ function App() {
 									type={card.type}
 									text={card.text}
 								/>
-								{/* </div> */}
 							</Grid>
 						);
 					} else {
