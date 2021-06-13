@@ -6,7 +6,7 @@ import GameCard from './components/GameCard';
 import SkeletonCard from './components/SkeletonCard';
 import * as constants from './constants';
 
-
+/* -- Fetch data from API based on page -- */
 const fetchData = async (page) => {
 	let response = await fetch(
 		`https://api.elderscrollslegends.io/v1/cards/?pageSize=${constants.PAGE_SIZE}&page=${page}`
@@ -15,6 +15,7 @@ const fetchData = async (page) => {
 };
 
 function App() {
+	/* -- State declaration -- */
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ function App() {
 	const [hasMore, setHasMore] = useState(false);
 	const [search, setSearch] = useState('');
 
+	/* -- Fuzzy search logic, either show cards based on search or show cards as shown previously -- */
 	const searchItem = (query) => {
 		if (!query) {
 			setData(data);
@@ -49,18 +51,20 @@ function App() {
 
 	const observer = useRef();
 
+	/* -- show cards before page load and also everytime the observer point is hit -- */
 	useEffect(() => {
 		setLoading(true);
 		setError(false);
 		fetchData(page)
 			.then((res) => {
-				setData((prevData) => [...new Set([...prevData, ...res.cards])]);
+				setData((prevData) => [...new Set([...prevData, ...res.cards])]); // do not show duplicate cards
 				setHasMore(res.cards.length > 0);
 				setLoading(false);
 			})
 			.catch((err) => setError(true));
 	}, [page]);
 
+	/* -- calculate when to populate additional cards -- */
 	const lastCardElemenetRef = useCallback(
 		(node) => {
 			if (loading) return;
