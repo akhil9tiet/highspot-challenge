@@ -66,4 +66,8 @@ yarn start
     -   `App.js`: contains the logic for using <mark>API to fetch cards</mark>, show <mark>Skeleton cards</mark> for <mark>'Infinite scroll'</mark> for 20 cards at a time and <mark>fuzzy search using `fuse.js`</mark>
     - App.css`: contains component styling so that the app can be viewed on <mark>different screen resolutions</mark>
 
+
+# Note:
+
+The git history is removed as I removed the feature branches. Also, there is a bug where the components was being spelled as C and it was giving an error on cloning. Hence, I deleted the original repo and created a fresh new one.
 #
