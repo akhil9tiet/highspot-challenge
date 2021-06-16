@@ -69,7 +69,3 @@ yarn start
     - App.css`: contains component styling so that the app can be viewed on <mark>different screen resolutions</mark>
 
 
-# Note:
-
-The git history is removed as I removed the feature branches. Also, there is a bug where the components was being spelled as C and it was giving an error on cloning. Hence, I deleted the original repo and created a fresh new one.
-#
