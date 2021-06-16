@@ -1,5 +1,7 @@
 # HighSpot Challenge
 
+# [Live Demo](https://highspot-challenge.vercel.app/)
+
 ## Requirements
 
 -   [x] Show results in a card grid format with the image prominently displayed.
