@@ -2,8 +2,8 @@ import Grid from '@material-ui/core/Grid';
 import Fuse from 'fuse.js';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
-import GameCard from './components/GameCard';
-import SkeletonCard from './components/SkeletonCard';
+import GameCard from './Components/GameCard';
+import SkeletonCard from './Components/SkeletonCard';
 import * as constants from './constants';
 
 /* -- Fetch data from API based on page -- */
